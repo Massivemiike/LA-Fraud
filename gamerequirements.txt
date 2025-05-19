@@ -1,0 +1,35 @@
+Game Plot: a young man just released from jail, no family, no friends and little money and time is ticking away. You have a choice to make something of yourself in the streets by performing crimes like burglary, selling drugs, manufacturing drugs, credit card fraud, robbery, theft, hijacking, credit card skimming, OR become a police officer and follow the law route where you can "catch" the bad guys through various tasks similar to crimes. As you rise to the top you upgrade and acquire new properties, businesses and more. You can create "gangs" and for police you can create "tasks force" that are equal to "gangs". 
+
+Key features of web text based mmorpg: 
+
+Character progression is crucial to player experience. 
+Attributes: Strength, Speed, Dexterity, Defense – used in combat.
+Level: Increases via experience from various activities (e.g., crimes, battles).
+Life: Health pool used in battles; regenerates over time or with items.
+Energy, Endurance, Mood: Core action points used for different activities (e.g., energy for gym, nerve for crimes).
+Knowledge Points: Earned through achievements and milestones; can be allocated to boost stats or abilities.
+
+Jail: Failure may result in jail time; players can bust others out of jail.
+Bounties: Place money on other players’ heads to encourage attacks.
+PvP Fighting: Players can attack others; win/loss depends on stats and strategy.
+Weapons & Armor: Equip firearms, melee weapons, and armor; each with stats and special effects.
+Temporary Items: Boost performance in battles (e.g., drugs, grenades).
+Hospital: After defeat, players are sent here for a cooldown period.
+Gym: Uses energy to increase combat stats.
+Special Gyms: Unlocked as stats grow or via faction perks.
+Training Enhancers: Items or bonuses that improve gym gains.
+Missions: Tasks given by NPCs for rewards; includes combat, delivery, and crime-based tasks.
+NPC Enemies: Some missions and events involve fighting AI-controlled opponents.
+Real Estate: Buy, rent, or upgrade homes for happiness and perks.
+Vaults: Store cash securely to prevent theft during attacks.
+Travel to Foreign Countries: Buy items, complete missions, smuggle goods.
+Cooldowns apply; requires planning.
+Games: Blackjack, Roulette, Slots, Poker, etc.
+Stock Market: Buy/sell stocks with fluctuating prices and dividends.
+Bookie: Bet on real-world sports or in-game events.
+Milestones: For crimes, battles, trading, etc.
+Awards: Trophies and medals with possible knowledge points rewards.
+Medical Supplies: Heal life points.
+Boosters: Increase happiness, energy, or reduce cooldowns.
+                                    
+

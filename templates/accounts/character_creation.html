@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Your Character - LA Fraud{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">Create Your Character</h2>
+            </div>
+            <div class="card-body">
+                <p class="text-center">
+                    Welcome to LA Fraud, {{ user.username_display }}! It's time to choose your path.
+                </p>
+                
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header bg-danger text-white">
+                                <h3 class="text-center">Criminal</h3>
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    As a criminal, you'll make your way through the streets by performing various illegal activities:
+                                </p>
+                                <ul>
+                                    <li>Burglary</li>
+                                    <li>Selling drugs</li>
+                                    <li>Manufacturing drugs</li>
+                                    <li>Credit card fraud</li>
+                                    <li>Robbery</li>
+                                    <li>Theft</li>
+                                    <li>Hijacking</li>
+                                    <li>Credit card skimming</li>
+                                </ul>
+                                <p>
+                                    You can create gangs with other criminals to increase your power and influence.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-header bg-primary text-white">
+                                <h3 class="text-center">Police Officer</h3>
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    As a police officer, you'll follow the law route and catch the bad guys through various tasks:
+                                </p>
+                                <ul>
+                                    <li>Patrol the streets</li>
+                                    <li>Investigate crimes</li>
+                                    <li>Bust drug operations</li>
+                                    <li>Catch thieves and robbers</li>
+                                    <li>Dismantle criminal organizations</li>
+                                    <li>Protect the innocent</li>
+                                    <li>Enforce the law</li>
+                                </ul>
+                                <p>
+                                    You can create task forces with other officers to increase your effectiveness.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="{{ form.character_type.name }}" id="criminal" value="criminal">
+                                    <label class="form-check-label" for="criminal">
+                                        <strong>Criminal</strong>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="{{ form.character_type.name }}" id="police" value="police">
+                                    <label class="form-check-label" for="police">
+                                        <strong>Police Officer</strong>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {% if form.character_type.errors %}
+                            <div class="text-danger">
+                                {% for error in form.character_type.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-lg">Create Character</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

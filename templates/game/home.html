@@ -1,0 +1,277 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - LA Fraud{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Player Stats -->
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Player Stats</h3>
+            </div>
+            <div class="card-body">
+                <h4>{{ user.username_display }}</h4>
+                <p>{{ profile.get_character_type_display }}</p>
+                
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Level:</span>
+                        <span>{{ stats.level }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Experience:</span>
+                        <span>{{ stats.experience }}</span>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Life:</span>
+                        <span>{{ stats.life }} / {{ stats.max_life }}</span>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Energy:</span>
+                        <span>{{ stats.energy }} / {{ stats.max_energy }}</span>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Endurance:</span>
+                        <span>{{ stats.endurance }} / {{ stats.max_endurance }}</span>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Mood:</span>
+                        <span>{{ stats.mood }} / {{ stats.max_mood }}</span>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Knowledge Points:</span>
+                        <span>{{ stats.knowledge_points }}</span>
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Money:</span>
+                        <span>${{ stats.money }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Bank:</span>
+                        <span>${{ stats.bank_money }}</span>
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Location:</span>
+                        <span>{{ stats.current_location }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Player Attributes -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Attributes</h3>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-1">
+                    <span>Strength:</span>
+                    <span>{{ profile.strength }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-1">
+                    <span>Speed:</span>
+                    <span>{{ profile.speed }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-1">
+                    <span>Dexterity:</span>
+                    <span>{{ profile.dexterity }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-1">
+                    <span>Defense:</span>
+                    <span>{{ profile.defense }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="col-md-8">
+        <!-- Status -->
+        {% if status.is_in_jail or status.is_in_hospital %}
+            <div class="card mb-4">
+                <div class="card-header bg-danger text-white">
+                    <h3>Status</h3>
+                </div>
+                <div class="card-body">
+                    {% if status.is_in_jail %}
+                        <div class="alert alert-danger">
+                            <h4>You are in jail!</h4>
+                            <p>You will be released at: {{ status.jail_release_time }}</p>
+                        </div>
+                    {% endif %}
+                    
+                    {% if status.is_in_hospital %}
+                        <div class="alert alert-warning">
+                            <h4>You are in the hospital!</h4>
+                            <p>You will be released at: {{ status.hospital_release_time }}</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+        
+        <!-- Quick Actions -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Quick Actions</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <a href="{% url 'crimes' %}" class="btn btn-danger w-100">Crimes</a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="{% url 'missions' %}" class="btn btn-primary w-100">Missions</a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="{% url 'gym' %}" class="btn btn-success w-100">Gym</a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="{% url 'shop' %}" class="btn btn-info w-100">Shop</a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="{% url 'travel' %}" class="btn btn-warning w-100">Travel</a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="{% url 'properties' %}" class="btn btn-secondary w-100">Properties</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recent Activities -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Recent Activities</h3>
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="activityTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="crimes-tab" data-bs-toggle="tab" data-bs-target="#crimes-tab-pane" type="button" role="tab" aria-controls="crimes-tab-pane" aria-selected="true">Crimes</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="missions-tab" data-bs-toggle="tab" data-bs-target="#missions-tab-pane" type="button" role="tab" aria-controls="missions-tab-pane" aria-selected="false">Missions</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="battles-tab" data-bs-toggle="tab" data-bs-target="#battles-tab-pane" type="button" role="tab" aria-controls="battles-tab-pane" aria-selected="false">Battles</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="activityTabsContent">
+                    <div class="tab-pane fade show active" id="crimes-tab-pane" role="tabpanel" aria-labelledby="crimes-tab" tabindex="0">
+                        {% if recent_crimes %}
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Crime</th>
+                                            <th>Result</th>
+                                            <th>Money</th>
+                                            <th>XP</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for crime in recent_crimes %}
+                                            <tr>
+                                                <td>{{ crime.crime.name }}</td>
+                                                <td>{% if crime.success %}Success{% else %}Failure{% endif %}</td>
+                                                <td>${{ crime.money_earned }}</td>
+                                                <td>{{ crime.experience_earned }}</td>
+                                                <td>{{ crime.date }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <p class="text-center mt-3">No recent crimes.</p>
+                        {% endif %}
+                    </div>
+                    <div class="tab-pane fade" id="missions-tab-pane" role="tabpanel" aria-labelledby="missions-tab" tabindex="0">
+                        {% if recent_missions %}
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Mission</th>
+                                            <th>Location</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for mission in recent_missions %}
+                                            <tr>
+                                                <td>{{ mission.mission.name }}</td>
+                                                <td>{{ mission.mission.location.name }}</td>
+                                                <td>{{ mission.completion_date }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <p class="text-center mt-3">No recent missions.</p>
+                        {% endif %}
+                    </div>
+                    <div class="tab-pane fade" id="battles-tab-pane" role="tabpanel" aria-labelledby="battles-tab" tabindex="0">
+                        {% if recent_battles %}
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Opponent</th>
+                                            <th>Result</th>
+                                            <th>Money Stolen</th>
+                                            <th>XP</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for battle in recent_battles %}
+                                            <tr>
+                                                <td>{{ battle.defender.user.username_display }}</td>
+                                                <td>{% if battle.attacker_won %}Won{% else %}Lost{% endif %}</td>
+                                                <td>${{ battle.money_stolen }}</td>
+                                                <td>{{ battle.experience_gained }}</td>
+                                                <td>{{ battle.date }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <p class="text-center mt-3">No recent battles.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

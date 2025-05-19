@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Verify Email - LA Fraud{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">Verify Your Email</h2>
+            </div>
+            <div class="card-body">
+                <p class="text-center">
+                    We've sent a verification code to your email address: <strong>{{ user.email }}</strong>
+                </p>
+                <p class="text-center">
+                    Please check your email and enter the verification code below to complete your registration.
+                </p>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.token.id_for_label }}" class="form-label">{{ form.token.label }}</label>
+                        {{ form.token }}
+                        {% if form.token.errors %}
+                            <div class="text-danger">
+                                {% for error in form.token.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Verify Email</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <p>Didn't receive the email? <a href="#">Resend Verification Email</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
